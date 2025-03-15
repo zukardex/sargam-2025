@@ -1,9 +1,19 @@
-import { Home, Calendar, Settings, Users, ChevronLeft, ChevronRight } from "lucide-react"
+import { Home, Calendar, Users, Table2Icon, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { Link, useLocation } from "react-router-dom"
 
 export function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const location = useLocation()
+
+  const menuItems = [
+    { icon: Home, label: "Home", path: "/" },
+    { icon: Calendar, label: "Events", path: "/events" },
+    { icon: Users, label: "Results", path: "/results" },
+    { icon: Table2Icon, label: "Points Table", path: "/points-table" },
+    { icon: Table2Icon, label: "Sargam Prathibha", path: "/sargam-prathibha" },
+  ]
 
   return (
     <div className={`relative h-screen border-r bg-background p-4 transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
@@ -16,22 +26,19 @@ export function Sidebar() {
         {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
       </Button>
       <nav className="space-y-2">
-        <Button variant="ghost" className="w-full justify-start">
-          <Home className="mr-2 h-4 w-4" />
-          {!isCollapsed && "Home"}
-        </Button>
-        <Button variant="ghost" className="w-full justify-start">
-          <Calendar className="mr-2 h-4 w-4" />
-          {!isCollapsed && "Events"}
-        </Button>
-        <Button variant="ghost" className="w-full justify-start">
-          <Users className="mr-2 h-4 w-4" />
-          {!isCollapsed && "Teams"}
-        </Button>
-        <Button variant="ghost" className="w-full justify-start">
-          <Settings className="mr-2 h-4 w-4" />
-          {!isCollapsed && "Settings"}
-        </Button>
+        {menuItems.map((item) => (
+          <Button
+            key={item.path}
+            variant={location.pathname === item.path ? "secondary" : "ghost"}
+            className="w-full justify-start"
+            asChild
+          >
+            <Link to={item.path}>
+              <item.icon className="mr-2 h-4 w-4" />
+              {!isCollapsed && item.label}
+            </Link>
+          </Button>
+        ))}
       </nav>
     </div>
   )
