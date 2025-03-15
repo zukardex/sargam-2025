@@ -1,14 +1,18 @@
 import React from 'react'
-import { TableDemo } from './components/TableDemo'
-
-
+import { Sidebar } from './components/Sidebar'
+import { Navbar } from './components/Navbar'
+import Banner from './components/Banner'
 
 const App = () => {
   return (
-    <div>
-      <h1 className='text-2xl bg-red-500'>Sargam 2025</h1>
-      <div className='flex justify-center items-center min-h-screen mx-auto'>
-        <TableDemo />
+    <div className="flex flex-col h-screen">
+      <Navbar />
+      <div className="flex flex-1">
+        <Sidebar />
+        <main className="flex-1 p-4">
+          {/* Main content will go here */}
+          <Banner />
+        </main>
       </div>
     </div>
   )
