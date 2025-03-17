@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 
 export function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
   const location = useLocation()
 
   const menuItems = [
