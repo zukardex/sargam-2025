@@ -1,22 +1,30 @@
-import { Home, Calendar, Users, Table2Icon, ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import {
+  Calendar,
+  Users,
+  Table2Icon,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "react-router-dom";
+import sargam_logo from "../assets/sargam_logo.png";
 
-export function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(true)
-  const location = useLocation()
+export function Sidebar({ isCollapsed, setIsCollapsed }) {
+  const location = useLocation();
 
   const menuItems = [
-    { icon: Home, label: "Home", path: "/" },
     { icon: Calendar, label: "Events", path: "/events" },
     { icon: Users, label: "Results", path: "/results" },
     { icon: Table2Icon, label: "Points Table", path: "/points-table" },
     { icon: Table2Icon, label: "Sargam Prathibha", path: "/sargam-prathibha" },
-  ]
+  ];
 
   return (
-    <div className={`relative h-screen border-r bg-background p-4 transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
+    <div
+      className={` h-screen border-r bg-background p-4 transition-all duration-300 fixed ${
+        isCollapsed ? "w-20" : "w-64"
+      }`}
+    >
       <Button
         variant="ghost"
         size="icon"
@@ -25,6 +33,19 @@ export function Sidebar() {
       >
         {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
       </Button>
+
+      {/* Logo */}
+      <div className="flex justify-center mb-6">
+        <Link to="/" className={`block ${isCollapsed ? "w-full" : "w-full"}`}>
+          <img
+            src={sargam_logo}
+            alt="Sargam Logo"
+            className="w-full h-auto drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)] transition-all duration-300"
+          />
+        </Link>
+      </div>
+
+      {/* Navigation */}
       <nav className="space-y-2">
         {menuItems.map((item) => (
           <Button
@@ -41,5 +62,5 @@ export function Sidebar() {
         ))}
       </nav>
     </div>
-  )
+  );
 }

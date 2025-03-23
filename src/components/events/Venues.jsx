@@ -92,7 +92,7 @@ export default function Venues() {
   return (
     <div className="p-6 min-h-screen bg-gray-50">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
-        🎭 Event Venues
+        Event Venues
       </h1>
 
       {/* Venue Tabs */}
