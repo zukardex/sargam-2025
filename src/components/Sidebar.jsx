@@ -51,8 +51,8 @@ export function Sidebar({ isCollapsed, setIsCollapsed }) {
             to={item.path}
             className={`flex items-center p-3 rounded-lg transition ${
               location.pathname === item.path
-                ? "bg-blue-600 text-white"
-                : "bg-gray-800 hover:bg-blue-500 hover:text-white"
+                ? "bg-yellow-400 text-black"
+                : "bg-gray-800 hover:bg-yellow-500 hover:text-black"
             }`}
           >
             <item.icon className="mr-2 h-5 w-5" />

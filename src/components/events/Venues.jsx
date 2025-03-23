@@ -32,7 +32,7 @@ export default function Venues() {
 
   return (
     <div className="p-6 min-h-screen bg-black text-white">
-      <h1 className="text-4xl font-bold text-center text-red-500 mb-6">Event Venues</h1>
+      <h1 className="text-4xl font-bold text-center text-red-600 mb-6">Event Venues</h1>
 
       {/* Venue Tabs */}
       <div className="flex flex-wrap justify-center space-x-2 border-b pb-2 border-gray-700">
@@ -42,8 +42,8 @@ export default function Venues() {
             onClick={() => setActiveTab(venue)}
             className={`py-2 px-4 rounded-full font-semibold shadow-md transition ${
               activeTab === venue
-                ? "bg-blue-600 text-white scale-105"
-                : "bg-gray-800 text-gray-300 hover:bg-blue-500 hover:text-white"
+                ? "bg-yellow-400 text-black scale-105"
+                : "bg-gray-800 text-gray-300 hover:bg-yellow-500 hover:text-black"
             }`}
           >
             {venue}
@@ -63,7 +63,7 @@ export default function Venues() {
         <select
           onChange={(e) => setSortType(e.target.value)}
           value={sortType}
-          className="p-2 border border-gray-600 rounded bg-gray-900 text-white shadow"
+          className="p-2 border border-gray-600 rounded bg-gray-900 text-white shadow "
         >
           <option value="time">Sort by Time</option>
           <option value="status">Sort by Status</option>
@@ -72,7 +72,7 @@ export default function Venues() {
 
       {/* Events List */}
       <div className="mt-6 p-6 border border-gray-700 rounded-lg shadow-lg bg-gray-900">
-        <h2 className="text-2xl font-semibold mb-4 text-blue-400">{activeTab} Events</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-yellow-400">{activeTab} Events</h2>
         {filteredEvents.length > 0 ? (
           <ul className="space-y-4">
             {filteredEvents.map((event, index) => (

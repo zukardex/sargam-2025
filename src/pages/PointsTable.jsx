@@ -42,7 +42,7 @@ export default function PointsTable() {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse shadow-lg bg-gray-800 rounded-3xl">
           <thead>
-            <tr className="bg-red-600 text-white text-lg">
+            <tr className="bg-yellow-400 text-black text-lg">
               <th className="border border-gray-700 p-4">Department</th>
               <th className="border border-gray-700 p-4">Group 1st</th>
               <th className="border border-gray-700 p-4">Group 2nd</th>
@@ -59,7 +59,7 @@ export default function PointsTable() {
                 key={index}
                 className="text-center even:bg-gray-700 odd:bg-gray-800 hover:bg-gray-600 transition"
               >
-                <td className="border border-gray-700 p-4 font-semibold text-red-600">
+                <td className="border border-gray-700 p-4 font-semibold text-yellow-600">
                   {dept.department}
                 </td>
                 <td className="border border-gray-700 p-4">{dept.group.first}</td>
@@ -68,7 +68,7 @@ export default function PointsTable() {
                 <td className="border border-gray-700 p-4">{dept.individual.first}</td>
                 <td className="border border-gray-700 p-4">{dept.individual.second}</td>
                 <td className="border border-gray-700 p-4">{dept.individual.third}</td>
-                <td className="border border-gray-700 p-4 font-bold text-red-600">
+                <td className="border border-gray-700 p-4 font-bold text-yellow-600">
                   {dept.totalPoints}
                 </td>
               </tr>

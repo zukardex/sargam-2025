@@ -22,7 +22,7 @@ export default function SargamPrathibha() {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse shadow-lg bg-gray-800 rounded-lg">
           <thead>
-            <tr className="bg-red-600 text-white text-lg">
+            <tr className="bg-yellow-400 text-black text-lg">
               <th className="border border-gray-700 p-4">Rank</th>
               <th className="border border-gray-700 p-4">Name</th>
               <th className="border border-gray-700 p-4">Department</th>
@@ -48,7 +48,7 @@ export default function SargamPrathibha() {
                 <td className="border border-gray-700 p-4">
                   {student.year}
                 </td>
-                <td className="border border-gray-700 p-4 font-bold text-red-500">
+                <td className="border border-gray-700 p-4 font-bold text-yellow-500">
                   {student.totalPoints}
                 </td>
               </tr>
