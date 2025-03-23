@@ -5,7 +5,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import sargam_logo from "../assets/sargam_logo.png";
 
@@ -21,26 +20,25 @@ export function Sidebar({ isCollapsed, setIsCollapsed }) {
 
   return (
     <div
-      className={` h-screen border-r bg-background p-4 transition-all duration-300 fixed ${
+      className={`h-screen border-r border-gray-700 bg-black text-white p-4 transition-all duration-300 fixed ${
         isCollapsed ? "w-20" : "w-64"
       }`}
     >
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute -right-4 top-4 h-8 w-8 rounded-full"
+      {/* Toggle Button */}
+      <button
+        className="absolute -right-4 top-4 h-8 w-8 rounded-full bg-gray-800 hover:bg-gray-700 text-white shadow-md flex items-center justify-center"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-      </Button>
+      </button>
 
       {/* Logo */}
       <div className="flex justify-center mb-6">
-        <Link to="/" className={`block ${isCollapsed ? "w-full" : "w-full"}`}>
+        <Link to="/" className="block w-full">
           <img
             src={sargam_logo}
             alt="Sargam Logo"
-            className="w-full h-auto drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)] transition-all duration-300"
+            className="w-full h-auto drop-shadow-[0_4px_6px_rgba(255,255,255,0.4)] transition-all duration-300"
           />
         </Link>
       </div>
@@ -48,17 +46,18 @@ export function Sidebar({ isCollapsed, setIsCollapsed }) {
       {/* Navigation */}
       <nav className="space-y-2">
         {menuItems.map((item) => (
-          <Button
+          <Link
             key={item.path}
-            variant={location.pathname === item.path ? "secondary" : "ghost"}
-            className="w-full justify-start"
-            asChild
+            to={item.path}
+            className={`flex items-center p-3 rounded-lg transition ${
+              location.pathname === item.path
+                ? "bg-blue-600 text-white"
+                : "bg-gray-800 hover:bg-blue-500 hover:text-white"
+            }`}
           >
-            <Link to={item.path}>
-              <item.icon className="mr-2 h-4 w-4" />
-              {!isCollapsed && item.label}
-            </Link>
-          </Button>
+            <item.icon className="mr-2 h-5 w-5" />
+            {!isCollapsed && <span className="text-sm font-medium">{item.label}</span>}
+          </Link>
         ))}
       </nav>
     </div>
