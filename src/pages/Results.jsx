@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Results() {
   const [expandedEvent, setExpandedEvent] = useState(null);
@@ -46,50 +47,58 @@ export default function Results() {
   ];
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4 text-center">Results Page</h1>
-      <div className="mt-4 p-6 border rounded-lg shadow-md bg-gray-100">
-        <h2 className="text-xl font-semibold mb-2">Event Results</h2>
+    <div className="p-6 min-h-screen bg-black text-white">
+      <h1 className="text-4xl font-bold mb-4 text-center text-red-600">
+        Results Page
+      </h1>
+      <div className="mt-4 p-6 border border-gray-700 rounded-lg shadow-md bg-gray-900">
+        <h2 className="text-xl font-semibold mb-2 text-yellow-400">Event Results</h2>
         {results.length > 0 ? (
           <ul className="space-y-3">
             {results.map((event, index) => (
               <li
                 key={index}
-                className="p-4 bg-white rounded-lg shadow-md border cursor-pointer"
+                className="p-4 bg-gray-800 hover:bg-gray-700 rounded-lg shadow-md border border-gray-600 cursor-pointer transition"
                 onClick={() =>
-                  setExpandedEvent(
-                    expandedEvent === event.name ? null : event.name
-                  )
+                  setExpandedEvent(expandedEvent === event.name ? null : event.name)
                 }
               >
                 <div className="flex justify-between items-center">
                   <p className="text-lg font-medium">{event.name}</p>
-                  <p className="text-gray-500 text-sm">{event.venue}</p>
+                  <p className="text-gray-400 text-sm">{event.venue}</p>
                 </div>
-                {expandedEvent === event.name && (
-                  <div className="mt-2 p-4 bg-gray-50 rounded-lg">
-                    <h3 className="text-lg font-semibold">Winners</h3>
-                    <ol className="list-decimal ml-6 space-y-1">
-                      <li>
-                        <strong>1st:</strong> {event.first.name} (
-                        {event.first.department}, {event.first.year})
-                      </li>
-                      <li>
-                        <strong>2nd:</strong> {event.second.name} (
-                        {event.second.department}, {event.second.year})
-                      </li>
-                      <li>
-                        <strong>3rd:</strong> {event.third.name} (
-                        {event.third.department}, {event.third.year})
-                      </li>
-                    </ol>
-                  </div>
-                )}
+                <AnimatePresence>
+                  {expandedEvent === event.name && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-2 p-4 bg-gray-700 rounded-lg overflow-hidden"
+                    >
+                      <h3 className="text-lg font-semibold text-green-400">Winners</h3>
+                      <ol className="list-decimal ml-6 space-y-1">
+                        <li>
+                          <strong>1st:</strong> {event.first.name} (
+                          {event.first.department}, {event.first.year})
+                        </li>
+                        <li>
+                          <strong>2nd:</strong> {event.second.name} (
+                          {event.second.department}, {event.second.year})
+                        </li>
+                        <li>
+                          <strong>3rd:</strong> {event.third.name} (
+                          {event.third.department}, {event.third.year})
+                        </li>
+                      </ol>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-gray-600 text-center">No results available.</p>
+          <p className="text-gray-400 text-center">No results available.</p>
         )}
       </div>
     </div>
