@@ -1,5 +1,6 @@
 import Banner from "@/components/Banner";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Home() {
   const buttonItems = [
@@ -40,10 +41,14 @@ export default function Home() {
       {/* Navigation Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-16">
         {buttonItems.map((item, index) => (
-          <a
+          <NavLink
             key={index}
-            href={item.link}
-            className="relative block min-h-56 bg-gradient-to-r from-red-700 to-red-500 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+            to={item.link}
+            className={({ isActive }) =>
+              `relative block min-h-56 bg-gradient-to-r from-red-700 to-red-500 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden ${
+                isActive ? 'ring-2 ring-yellow-400' : ''
+              }`
+            }
           >
             {/* Card Background Animation */}
             <div className="absolute inset-0 bg-opacity-30 bg-black hover:bg-opacity-20 transition-all duration-300"></div>
@@ -57,7 +62,7 @@ export default function Home() {
                 {item.caption}
               </p>
             </div>
-          </a>
+          </NavLink>
         ))}
       </div>
     </div>
