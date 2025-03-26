@@ -1,56 +1,45 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function PointsTable() {
-  const pointsData = [
-    {
-      department: "Music",
-      group: { first: 3, second: 2, third: 1 },
-      individual: { first: 2, second: 3, third: 1 },
-      totalPoints: 50,
-    },
-    {
-      department: "Arts",
-      group: { first: 2, second: 3, third: 1 },
-      individual: { first: 1, second: 2, third: 3 },
-      totalPoints: 40,
-    },
-    {
-      department: "Science",
-      group: { first: 1, second: 1, third: 2 },
-      individual: { first: 3, second: 2, third: 1 },
-      totalPoints: 35,
-    },
-    {
-      department: "Mechanical",
-      group: { first: 2, second: 1, third: 3 },
-      individual: { first: 2, second: 1, third: 2 },
-      totalPoints: 42,
-    },
-    {
-      department: "Drama",
-      group: { first: 1, second: 2, third: 2 },
-      individual: { first: 1, second: 1, third: 3 },
-      totalPoints: 30,
-    },
-  ];
+  const [pointsData, setPointsData] = useState([]);
 
   useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const SHEET_ID = '1ZF6HOqrn7R6RKKFA0jHqw9maT9TDFkI36efcb039Hk4';
-          const SHEET_NAME = 'Website Data'; // Update this to match your sheet name
-          const SHEET_RANGE = 'A2:E1000'; // Updated range to match 5 columns
-                  
-          const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}&range=${SHEET_RANGE}`;
-  
-        } catch (error) {
-          console.error("Error fetching data:", error);
+    const fetchData = async () => {
+      try {
+        const SHEET_ID = '1ZF6HOqrn7R6RKKFA0jHqw9maT9TDFkI36efcb039Hk4';
+        const SHEET_NAME = 'DEPT POINTS TABLE';
+        const SHEET_RANGE = 'A2:B8';
+        
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}&range=${SHEET_RANGE}`;
+        
+        const response = await fetch(url);
+        if(!response.ok) {
+          throw new Error('Network response was not ok');
         }
-      };
-      
-      fetchData();
-    }, []);
+
+        const text = await response.text();
+        const jsonStart = text.indexOf('{');
+        const jsonEnd = text.lastIndexOf('}') + 1;
+        const jsonString = text.substring(jsonStart, jsonEnd);
+        const data = JSON.parse(jsonString);
+
+        const rows = data.table.rows;
+        const formattedData = rows.map((row) => ({
+          department: row.c[0]?.v || '',
+          totalPoints: row.c[1]?.v || 0
+        }));
+
+        setPointsData(formattedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    
+    fetchData();
+
+    const interval = setInterval(fetchData, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="p-8 min-h-screen text-white">
@@ -62,12 +51,6 @@ export default function PointsTable() {
           <thead>
             <tr className="bg-yellow-400 text-black text-lg">
               <th className="border border-gray-700 p-4">Department</th>
-              <th className="border border-gray-700 p-4">Group 1st</th>
-              <th className="border border-gray-700 p-4">Group 2nd</th>
-              <th className="border border-gray-700 p-4">Group 3rd</th>
-              <th className="border border-gray-700 p-4">Individual 1st</th>
-              <th className="border border-gray-700 p-4">Individual 2nd</th>
-              <th className="border border-gray-700 p-4">Individual 3rd</th>
               <th className="border border-gray-700 p-4">Total Points</th>
             </tr>
           </thead>
@@ -80,12 +63,6 @@ export default function PointsTable() {
                 <td className="border border-gray-700 p-4 font-semibold text-yellow-600">
                   {dept.department}
                 </td>
-                <td className="border border-gray-700 p-4">{dept.group.first}</td>
-                <td className="border border-gray-700 p-4">{dept.group.second}</td>
-                <td className="border border-gray-700 p-4">{dept.group.third}</td>
-                <td className="border border-gray-700 p-4">{dept.individual.first}</td>
-                <td className="border border-gray-700 p-4">{dept.individual.second}</td>
-                <td className="border border-gray-700 p-4">{dept.individual.third}</td>
                 <td className="border border-gray-700 p-4 font-bold text-yellow-600">
                   {dept.totalPoints}
                 </td>
