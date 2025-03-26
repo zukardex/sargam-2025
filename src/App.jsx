@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
 import { MobileSidebar } from "./components/MobileSidebar";
@@ -8,10 +8,25 @@ import Results from "./pages/Results";
 import PointsTable from "./pages/PointsTable";
 import SargamPrathibha from "./pages/SargamPrathibha";
 import Footer from "./components/Footer";
+import Loader from "./components/Loader";
+import styles from './styles/FadeIn.module.css';
 
 const App = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Router>
@@ -24,7 +39,7 @@ const App = () => {
         {/* Mobile Sidebar */}
         <MobileSidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-        <main className={`flex-1 p-4 transition-all duration-300 ${isCollapsed ? "md:ml-20" : "md:ml-64"}`}>
+        <main className={`flex-1 p-4 transition-all duration-300 ${isCollapsed ? "md:ml-20" : "md:ml-64"} ${styles.fadeIn}`}>
           {/* Mobile Menu Button */}
           <button 
             className="md:hidden mb-4 p-2 rounded-lg hover:bg-gray-100"
