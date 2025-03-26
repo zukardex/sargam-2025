@@ -1,6 +1,5 @@
 import Banner from "@/components/Banner";
 import React from "react";
-import bg_1 from "@/assets/bg_1.jpg";
 
 export default function Home() {
   const buttonItems = [
@@ -29,11 +28,11 @@ export default function Home() {
   return (
     <div className="container mx-auto py-8 px-8">
       {/* Hero Section */}
-      <div className="text-center">
+      <div className="text-center p-5">
         <h1 className="text-5xl md:text-6xl font-extrabold text-red-700 drop-shadow-lg leading-tight">
           Welcome to <span className="text-yellow-400">Sargam 2025</span>
         </h1>
-        <p className="mt-4 text-lg md:text-xl text-gray-800 font-medium max-w-2xl mx-auto">
+        <p className="mt-4 text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto">
           A vibrant celebration of talent, culture, and unity!
         </p>
       </div>

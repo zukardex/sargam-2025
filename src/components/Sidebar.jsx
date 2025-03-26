@@ -20,7 +20,7 @@ export function Sidebar({ isCollapsed, setIsCollapsed }) {
 
   return (
     <div
-      className={`h-screen border-r border-gray-700 bg-black text-white p-4 transition-all duration-300 fixed ${
+      className={`hidden md:block h-screen border-r border-gray-700 bg-black text-white p-4 transition-all duration-300 fixed ${
         isCollapsed ? "w-20" : "w-64"
       }`}
     >

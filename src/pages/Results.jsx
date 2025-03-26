@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Results() {
@@ -45,6 +45,23 @@ export default function Results() {
       third: { name: "Oscar", department: "Communication", year: "2nd Year" },
     },
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const SHEET_ID = '1ZF6HOqrn7R6RKKFA0jHqw9maT9TDFkI36efcb039Hk4';
+        const SHEET_NAME = 'Website Data'; // Update this to match your sheet name
+        const SHEET_RANGE = 'A2:E1000'; // Updated range to match 5 columns
+                
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}&range=${SHEET_RANGE}`;
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    
+    fetchData();
+  }, []);
 
   return (
     <div className="p-6 min-h-screen bg-black text-white">

@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 
 export default function PointsTable() {
   const pointsData = [
@@ -33,6 +34,23 @@ export default function PointsTable() {
       totalPoints: 30,
     },
   ];
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const SHEET_ID = '1ZF6HOqrn7R6RKKFA0jHqw9maT9TDFkI36efcb039Hk4';
+          const SHEET_NAME = 'Website Data'; // Update this to match your sheet name
+          const SHEET_RANGE = 'A2:E1000'; // Updated range to match 5 columns
+                  
+          const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}&range=${SHEET_RANGE}`;
+  
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      
+      fetchData();
+    }, []);
 
   return (
     <div className="p-8 min-h-screen text-white">
