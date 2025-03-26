@@ -7,6 +7,7 @@ import Events from "./pages/Events";
 import Results from "./pages/Results";
 import PointsTable from "./pages/PointsTable";
 import SargamPrathibha from "./pages/SargamPrathibha";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="/points-table" element={<PointsTable />} />
             <Route path="/sargam-prathibha" element={<SargamPrathibha />} />
           </Routes>
+          <Footer />
         </main>
       </div>
     </Router>

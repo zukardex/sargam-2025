@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import sargam_logo from '../assets/sargam_logo.png';
+import { Link } from 'react-router-dom';
 
 export const MobileSidebar = ({ isOpen, onClose }) => {
   return (
@@ -20,6 +22,15 @@ export const MobileSidebar = ({ isOpen, onClose }) => {
           <button onClick={onClose} className="mb-4">
             <span className="text-2xl">×</span>
           </button>
+          <div className="flex justify-center mb-6">
+            <Link to="/" className="block w-full">
+              <img
+                src={sargam_logo}
+                alt="Sargam Logo"
+                className="w-full h-auto drop-shadow-[0_4px_6px_rgba(255,255,255,0.2)] transition-all duration-300"
+              />
+            </Link>
+          </div>
           <nav>
             <NavLink to="/" className="block py-2" onClick={onClose}>Home</NavLink>
             <NavLink to="/events" className="block py-2" onClick={onClose}>Events</NavLink>
