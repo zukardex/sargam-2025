@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="flex h-screen">
+      <div className="flex min-h-screen">
         {/* Desktop Sidebar */}
         <div className="hidden md:block">
           <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
@@ -50,13 +50,15 @@ const App = () => {
             </svg>
           </button>
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/results" element={<Results />} />
-            <Route path="/points-table" element={<PointsTable />} />
-            <Route path="/sargam-prathibha" element={<SargamPrathibha />} />
-          </Routes>
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/results" element={<Results />} />
+              <Route path="/points-table" element={<PointsTable />} />
+              <Route path="/sargam-prathibha" element={<SargamPrathibha />} />
+            </Routes>
+          </div>
           <Footer />
         </main>
       </div>
