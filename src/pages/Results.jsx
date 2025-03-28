@@ -3,58 +3,38 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Results() {
   const [expandedEvent, setExpandedEvent] = useState(null);
-
-  const results = [
-    {
-      name: "Classical Music Concert",
-      venue: "Sargam Stage",
-      first: { name: "Alice", department: "Music", year: "3rd Year" },
-      second: { name: "Bob", department: "Arts", year: "2nd Year" },
-      third: { name: "Charlie", department: "Science", year: "1st Year" },
-    },
-    {
-      name: "EDM Night",
-      venue: "DJ Hall",
-      first: { name: "Dave", department: "DJ Club", year: "Final Year" },
-      second: { name: "Eve", department: "Music", year: "3rd Year" },
-      third: { name: "Frank", department: "Entertainment", year: "2nd Year" },
-    },
-    {
-      name: "Stand-up Comedy",
-      venue: "Archie Corner",
-      first: { name: "Grace", department: "Drama", year: "2nd Year" },
-      second: { name: "Hank", department: "Comedy", year: "3rd Year" },
-      third: { name: "Ivy", department: "Literature", year: "1st Year" },
-    },
-    {
-      name: "Rock Band Performance",
-      venue: "Mech Top",
-      first: { name: "Jack", department: "Mechanical", year: "Final Year" },
-      second: { name: "Karen", department: "Music", year: "3rd Year" },
-      third: { name: "Leo", department: "Arts", year: "2nd Year" },
-    },
-    {
-      name: "Keynote Speech",
-      venue: "CETAA Hall",
-      first: {
-        name: "Mike",
-        department: "Public Speaking",
-        year: "Final Year",
-      },
-      second: { name: "Nina", department: "Debate", year: "3rd Year" },
-      third: { name: "Oscar", department: "Communication", year: "2nd Year" },
-    },
-  ];
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const SHEET_ID = '1ZF6HOqrn7R6RKKFA0jHqw9maT9TDFkI36efcb039Hk4';
-        const SHEET_NAME = 'Website Data'; // Update this to match your sheet name
-        const SHEET_RANGE = 'A2:E1000'; // Updated range to match 5 columns
+        const SHEET_NAME = 'Individual'; // Update this to match your sheet name
+        const SHEET_RANGE = 'A2:K1000'; // Fetching required columns
                 
         const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}&range=${SHEET_RANGE}`;
+        const response = await fetch(url);
+        const text = await response.text();
+        const jsonData = JSON.parse(text.substring(47, text.length - 2));
 
+        const formattedResults = jsonData.table.rows.map(row => {
+          const name = row.c[0]?.v || "";
+          const first = row.c[8]?.v || "";
+          const second = row.c[9]?.v || "";
+          const third = row.c[10]?.v || "";
+          
+          if (!first && !second && !third) return null; // Ignore if no results
+          
+          return {
+            name,
+            venue: "N/A", // Marking all venues as N/A
+            first: { name: first, department: "", year: "" },
+            second: { name: second, department: "", year: "" },
+            third: { name: third, department: "", year: "" },
+          };
+        }).filter(event => event !== null);
+
+        setResults(formattedResults);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -96,16 +76,13 @@ export default function Results() {
                       <h3 className="text-lg font-semibold text-green-400">Winners</h3>
                       <ol className="list-decimal ml-6 space-y-1">
                         <li>
-                          <strong>1st:</strong> {event.first.name} (
-                          {event.first.department}, {event.first.year})
+                          <strong>1st:</strong> {event.first.name} 
                         </li>
                         <li>
-                          <strong>2nd:</strong> {event.second.name} (
-                          {event.second.department}, {event.second.year})
+                          <strong>2nd:</strong> {event.second.name} 
                         </li>
                         <li>
-                          <strong>3rd:</strong> {event.third.name} (
-                          {event.third.department}, {event.third.year})
+                          <strong>3rd:</strong> {event.third.name} 
                         </li>
                       </ol>
                     </motion.div>
