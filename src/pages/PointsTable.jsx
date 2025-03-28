@@ -8,7 +8,7 @@ export default function PointsTable() {
       try {
         const SHEET_ID = '1ZF6HOqrn7R6RKKFA0jHqw9maT9TDFkI36efcb039Hk4';
         const SHEET_NAME = 'DEPT POINTS TABLE';
-        const SHEET_RANGE = 'A2:B8';
+        const SHEET_RANGE = 'A2:B9';
         
         const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}&range=${SHEET_RANGE}`;
         
