@@ -19,11 +19,10 @@ const Banner = () => {
           Sargam <span className="text-yellow-300">2025</span>
         </h1>
         <p className="text-lg md:text-xl italic opacity-90">
-          The rhythm of celebration begins! 🎶
+        Oru CET Kalolsavam
         </p>
         <p className="mt-2 text-sm md:text-base max-w-md opacity-80">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          bibendum, turpis in pharetra auctor, risus felis faucibus felis.
+          Brace yourself for an unforgettable experience filled with music, dance, and creativity. Join us in celebrating the spirit of art and culture at Sargam 2025!
         </p>
       </div>
     </div>
