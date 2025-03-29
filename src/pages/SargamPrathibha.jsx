@@ -2,23 +2,18 @@ import React from "react";
 
 export default function SargamPrathibha() {
   const topStudents = [
-    { name: "Aryan Raj", department: "Music", year: "3rd", totalPoints: 95 },
-    { name: "Sneha Nair", department: "Arts", year: "2nd", totalPoints: 92 },
-    { name: "Rahul Kumar", department: "Science", year: "4th", totalPoints: 88 },
-    { name: "Meera Reddy", department: "Drama", year: "1st", totalPoints: 85 },
-    { name: "Aditya Sharma", department: "Mechanical", year: "3rd", totalPoints: 83 },
-    { name: "Divya Iyer", department: "Music", year: "2nd", totalPoints: 80 },
-    { name: "Nihal Joseph", department: "Arts", year: "4th", totalPoints: 78 },
-    { name: "Rohit Verma", department: "Science", year: "1st", totalPoints: 76 },
-    { name: "Priya Das", department: "Drama", year: "3rd", totalPoints: 74 },
-    { name: "Vikas Menon", department: "Mechanical", year: "2nd", totalPoints: 72 },
+    { name: "TBA", department: "TBA", year: "TBA", totalPoints: 0 },
+    { name: "TBA", department: "TBA", year: "TBA", totalPoints: 0 },
   ];
 
   return (
     <div className="p-8 min-h-screen">
       <h1 className="text-4xl font-extrabold mb-6 text-center text-red-600">
-        Sargam Prathibha
+        Sargam Prathibha 
       </h1>
+      <h2 className="text-2xl font-extrabold mb-6 text-center text-white-600">
+        Will be updated soon 
+      </h2>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse shadow-lg bg-gray-800 rounded-lg">
           <thead>

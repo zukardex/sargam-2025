@@ -6,13 +6,13 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package.json package-lock.json ./
-RUN npm install -g pm2 && npm install
+RUN npm install
 
 # Copy all source files
 COPY . .
 
-# Expose Vite's default port
-EXPOSE 80
+# Expose Vite's development port (3000 by default)
+EXPOSE 3000
 
-# Use PM2 to run Vite in the background
-CMD ["pm2-runtime", "npm", "--", "run", "dev"]
+# Run Vite in development mode
+CMD ["npm", "run", "dev"]
